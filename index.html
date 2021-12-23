@@ -246,14 +246,14 @@
 
       function movieTitleClick(movieTitle,notInList)
       {
-  			if(notInList == false)
-  			{
-  				$('#movieToListBtn').text('Close');
-  			}
-  			else
-  			{
-  				$('#movieToListBtn').text('Add to List');
-  			}
+        if(notInList == false)
+        {
+          $('#movieToListBtn').text('Close');
+        }
+        else
+        {
+          $('#movieToListBtn').text('Add to List');
+        }
 
         $.get("http://www.omdbapi.com/?apikey="+omdbapiKey+"&t="+movieTitle, function(data, status){
           if(status == 'success') 
