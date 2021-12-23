@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <style>
+      #movie_details{
+        font: status-bar;
+      }
+      .extra_bottom_padding{
+        padding-bottom: 15px;
+      }
+      .header_one_font{
+        font-family: "Verdana", Geneva, sans-serif;
+        font-size: x-large;
+        color: dodgerblue;
+      }
+      p{
+        font-family: "Verdana", Geneva, sans-serif;
+      }
+      #movie_details{
+        font-family: "Verdana", Geneva, sans-serif;
+      }
+      .modal-title{
+        font-family: "Verdana", Geneva, sans-serif;
+        color: dodgerblue;
+      }
+      .movie_poster_in_collection{
+      	height: 350px;
+      	width: auto;
+      }
+      .movie_poster_in_collection_search{
+      	height: 250px;
+      	width: auto;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-light bg-light">
+      <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchBar">
+        <input id="searchBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#staticBackdropMovieSearch" onclick="movieSearch();" value="Search">
+      </form>
+    </nav>
+
+    <!-- Movie List -->
+    <div class="container">
+      <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Movie List</h1>
+      <hr class="mt-2 mb-5">
+      <div id="movieListDiv" class="row text-center text-lg-left"></div>
+    </div>
+
+    <!-- Movie Search Modal -->
+    <div class="modal fade" id="staticBackdropMovieSearch" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropMovieSearchLabel">Movie Searh</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="movieSearchBody"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Movie Info Modal -->
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- Container -->
+            <div class="container">
+            <div class="row">
+              <div class="col-4">
+                <!-- Movie poster and movie details -->
+                <div class="container" id="movie_details">
+                  <div class="row extra_bottom_padding">
+                    <div class="col-xl">
+                      <div id="poster"></div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl">
+                      <div id="productionCompanyAndYear"></div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl">
+                      <div id="genre"></div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl">
+                      <div id="countryLanguageRunningTime"></div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl">
+                      <div id="IMDBRating"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-8">
+                <!-- Movie Plot -->
+                <div class="container extra_bottom_padding" id="movie_plot">
+                  <div class="row">
+                    <div class="col-xl">
+                      <h1 class="header_one_font">Plot</h1>
+                      <p id="plot">
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <!-- Awards -->
+                <div class="container extra_bottom_padding" id="movie_awards">
+                  <div class="row">
+                    <div class="col-xl">
+                      <h1 class="header_one_font">Awards</h1>
+                      <p id="awards">
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <!-- Director -->
+                <div class="container extra_bottom_padding" id="movie_director">
+                  <div class="row">
+                    <div class="col-xl">
+                      <h1 class="header_one_font">Director</h1>
+                      <p id="director">
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <!-- Cast -->
+                <div class="container extra_bottom_padding" id="movie_cast">
+                  <div class="row">
+                    <div class="col-xl">
+                      <h1 class="header_one_font">Cast</h1>
+                      <p id="cast">
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <!-- Writer -->
+                <div class="container extra_bottom_padding" id="movie_writer">
+                  <div class="row">
+                    <div class="col-xl">
+                      <h1 class="header_one_font">Writer</h1>
+                      <p id="writer">
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button id="movieToListBtn"data="" type="button" data-dismiss="modal" class="btn btn-primary" onclick="addMovieToList(this);">Add to List</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+    <!--jquery-csv.js-->
+    <script src="jquery-csv.js"></script>
+
+    <!-- config file -->
+    <script type='text/javascript' src='config.js'></script>
+
+    <script>
+      // global vars
+      var omdbapiKey = config.omdbapi_key;
+
+      // wacth for user to hit enter instead of clikcing button
+      var input = document.getElementById("searchBar");
+      input.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          document.getElementById("searchBtn").click();
+        }
+      });
+
+      function movieSearch()
+      {
+        // get search bar 
+        let searchTerm = '';
+        if($('#searchBar').val() != null && $('#searchBar').val() != undefined) {
+          searchTerm = $('#searchBar').val().replace(' ','?');
+        }
+
+        if(searchTerm != '') {
+          $.get("http://www.omdbapi.com/?apikey="+omdbapiKey+"&s="+searchTerm, function(data, status){
+            if(status == 'success') {
+              console.log(data);
+              console.log('status '+status);
+
+              // populate search title
+              $('#staticBackdropMovieSearchLabel').html(""+searchTerm.replace('?',' ')+"");
+
+
+              let searchBodyHTMLString = '<div class="row text-center text-lg-left">';
+              for(let i = 0; i < data.Search.length; i++)
+              {
+                // only show movies that have posters
+                if(data.Search[i].Poster != 'N/A' && data.Search[i].Poster != null)
+                {
+                  let movieTitle = data.Search[i].Title.replace("'","");
+                  searchBodyHTMLString += '<div class="col-lg-3 col-md-4 col-6">'+
+                    '<a href="#" class="d-block mb-4 h-100">'+
+                      '<img class="img-fluid img-thumbnail movie_poster_in_collection_search" src="'+data.Search[i].Poster+'"alt="'+movieTitle+'" data-dismiss="modal" data-toggle="modal" data-target="#staticBackdrop" onclick="movieTitleClick(\''+movieTitle+'\',true);">'+
+                    '</a>'+
+                  '</div>';
+                }
+              }
+              searchBodyHTMLString += '</div>';
+
+              // save content to movie search modal
+              $('#movieSearchBody').html(searchBodyHTMLString);
+            }
+          });
+        }
+      }
+
+  		function movieTitleClick(movieTitle,notInList)
+  		{
+  			if(notInList == false)
+  			{
+  				$('#movieToListBtn').text('Close');
+  			}
+  			else
+  			{
+  				$('#movieToListBtn').text('Add to List');
+  			}
+
+	        $.get("http://www.omdbapi.com/?apikey="+omdbapiKey+"&t="+movieTitle, function(data, status){
+	    			if(status == 'success') {
+	    				console.log('status '+status);
+	    				console.log(data);
+
+	    				$(document).ready( function () {
+	      				$('#poster').html('<img src="'+data.Poster+'" class="img-thumbnail">');
+	              $('#staticBackdropLabel').html(movieTitle);
+	    					$('#productionCompanyAndYear').html(data.Production+'('+data.Year+')');
+	    					$('#genre').html(data.Genre);
+	    					$('#countryLanguageRunningTime').html(data.Country+' | '+data.Language+' | '+data.Runtime);
+	              if(data.Ratings.length > 0){
+	    					 $('#IMDBRating').html(data.Ratings[0].Source+' '+data.Ratings[0].Value);
+	              }
+	    					$('#plot').html(data.Plot);
+	    					$('#awards').html(data.Awards);
+	    					$('#director').html(data.Director);
+	    					$('#cast').html(data.Actors);
+	    					$('#writer').html(data.Writer);
+	              $('#movieToListBtn').data('movieDetails',{poster: data.Poster,
+	                                                   title: movieTitle});
+	    				});
+	    			}
+	  	  	});
+  		}
+
+      function addMovieToList(addToListButtonInstance)
+      {
+      	if(addToListButtonInstance.innerText == 'Add to List')
+	    {
+	        let existingHTML = $('#movieListDiv').html();
+
+	        let movieToListBtn = $(addToListButtonInstance).data('movieDetails');
+
+	        existingHTML += '<div class="col-lg-3 col-md-4 col-6">'+
+	          '<a href="#" class="d-block mb-4 h-100">'+
+	            '<img class="img-fluid img-thumbnail movie_poster_in_collection" src="'+movieToListBtn.poster+'" alt="'+movieToListBtn.title+'" data-dismiss="modal" data-toggle="modal" data-target="#staticBackdrop" onclick="movieTitleClick(\''+movieToListBtn.title+'\',false);">'+
+	          '</a>'+
+	        '</div>';
+
+	        $('#movieListDiv').html(existingHTML);
+	    }
+      }
+
+    </script>
+  </body>
+</html>
