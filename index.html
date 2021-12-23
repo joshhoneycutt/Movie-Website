@@ -197,7 +197,8 @@
       // wacth for user to hit enter instead of clikcing button
       var input = document.getElementById("searchBar");
       input.addEventListener("keyup", function(event) {
-        if (event.keyCode === 13) {
+        if (event.keyCode === 13) 
+        {
           event.preventDefault();
           document.getElementById("searchBtn").click();
         }
@@ -207,19 +208,18 @@
       {
         // get search bar 
         let searchTerm = '';
-        if($('#searchBar').val() != null && $('#searchBar').val() != undefined) {
+        if($('#searchBar').val() != null && $('#searchBar').val() != undefined) 
+        {
           searchTerm = $('#searchBar').val().replace(' ','?');
         }
 
-        if(searchTerm != '') {
+        if(searchTerm != '') 
+        {
           $.get("http://www.omdbapi.com/?apikey="+omdbapiKey+"&s="+searchTerm, function(data, status){
-            if(status == 'success') {
-              console.log(data);
-              console.log('status '+status);
-
+            if(status == 'success') 
+            {
               // populate search title
               $('#staticBackdropMovieSearchLabel').html(""+searchTerm.replace('?',' ')+"");
-
 
               let searchBodyHTMLString = '<div class="row text-center text-lg-left">';
               for(let i = 0; i < data.Search.length; i++)
@@ -255,48 +255,47 @@
   				$('#movieToListBtn').text('Add to List');
   			}
 
-	        $.get("http://www.omdbapi.com/?apikey="+omdbapiKey+"&t="+movieTitle, function(data, status){
-	    			if(status == 'success') {
-	    				console.log('status '+status);
-	    				console.log(data);
-
-	    				$(document).ready( function () {
-	      				$('#poster').html('<img src="'+data.Poster+'" class="img-thumbnail">');
-	              $('#staticBackdropLabel').html(movieTitle);
-	    					$('#productionCompanyAndYear').html(data.Production+'('+data.Year+')');
-	    					$('#genre').html(data.Genre);
-	    					$('#countryLanguageRunningTime').html(data.Country+' | '+data.Language+' | '+data.Runtime);
-	              if(data.Ratings.length > 0){
-	    					 $('#IMDBRating').html(data.Ratings[0].Source+' '+data.Ratings[0].Value);
-	              }
-	    					$('#plot').html(data.Plot);
-	    					$('#awards').html(data.Awards);
-	    					$('#director').html(data.Director);
-	    					$('#cast').html(data.Actors);
-	    					$('#writer').html(data.Writer);
-	              $('#movieToListBtn').data('movieDetails',{poster: data.Poster,
-	                                                   title: movieTitle});
-	    				});
-	    			}
-	  	  	});
+        $.get("http://www.omdbapi.com/?apikey="+omdbapiKey+"&t="+movieTitle, function(data, status){
+          if(status == 'success') 
+          {
+            $(document).ready( function () 
+            {
+              $('#poster').html('<img src="'+data.Poster+'" class="img-thumbnail">');
+              $('#staticBackdropLabel').html(movieTitle);
+              $('#productionCompanyAndYear').html(data.Production+'('+data.Year+')');
+              $('#genre').html(data.Genre);
+              $('#countryLanguageRunningTime').html(data.Country+' | '+data.Language+' | '+data.Runtime);
+              if(data.Ratings.length > 0)
+              {
+                $('#IMDBRating').html(data.Ratings[0].Source+' '+data.Ratings[0].Value);
+              }
+              $('#plot').html(data.Plot);
+              $('#awards').html(data.Awards);
+              $('#director').html(data.Director);
+              $('#cast').html(data.Actors);
+              $('#writer').html(data.Writer);
+              $('#movieToListBtn').data('movieDetails',{poster: data.Poster, title: movieTitle});
+            });
+          }
+        });
   		}
 
       function addMovieToList(addToListButtonInstance)
       {
-      	if(addToListButtonInstance.innerText == 'Add to List')
-	    {
-	        let existingHTML = $('#movieListDiv').html();
+        if(addToListButtonInstance.innerText == 'Add to List')
+        {
+          let existingHTML = $('#movieListDiv').html();
 
-	        let movieToListBtn = $(addToListButtonInstance).data('movieDetails');
+          let movieToListBtn = $(addToListButtonInstance).data('movieDetails');
 
-	        existingHTML += '<div class="col-lg-3 col-md-4 col-6">'+
-	          '<a href="#" class="d-block mb-4 h-100">'+
-	            '<img class="img-fluid img-thumbnail movie_poster_in_collection" src="'+movieToListBtn.poster+'" alt="'+movieToListBtn.title+'" data-dismiss="modal" data-toggle="modal" data-target="#staticBackdrop" onclick="movieTitleClick(\''+movieToListBtn.title+'\',false);">'+
-	          '</a>'+
-	        '</div>';
+          existingHTML += '<div class="col-lg-3 col-md-4 col-6">'+
+            '<a href="#" class="d-block mb-4 h-100">'+
+              '<img class="img-fluid img-thumbnail movie_poster_in_collection" src="'+movieToListBtn.poster+'" alt="'+movieToListBtn.title+'" data-dismiss="modal" data-toggle="modal" data-target="#staticBackdrop" onclick="movieTitleClick(\''+movieToListBtn.title+'\',false);">'+
+            '</a>'+
+          '</div>';
 
-	        $('#movieListDiv').html(existingHTML);
-	    }
+          $('#movieListDiv').html(existingHTML);
+        }
       }
 
     </script>
